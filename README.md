@@ -115,7 +115,6 @@ Each answer is scored on:
 - **Hallucination score** — lower is better; flags ungrounded claims
 - **Answer relevance score** — higher is better; measures query-answer alignment
 
-These metrics let the pipeline be assessed the way production RAG systems should be: on *trustworthiness*, not just whether the code runs.
 
 ## Future Improvements
 - Swap Milvus Lite for a hosted Milvus/Zilliz cluster for production scale
