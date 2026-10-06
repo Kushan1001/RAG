@@ -141,7 +141,6 @@ export HF_TOKEN="your_huggingface_token"
 export OPIK_API_KEY="your_opik_api_key"
 export OPENAI_API_KEY="your_openai_api_key"
 ```
-> ⚠️ Do **not** hardcode API keys in the notebook. Load them via `os.environ.get("OPENAI_API_KEY")` or `python-dotenv`, and clear any keys from the notebook before committing it.
 
 ### 3. Run the notebook
 Open `RAG_ASSIGNMENT.ipynb` in Jupyter/Colab and run cells top to bottom. This will:
@@ -183,23 +182,3 @@ answer_df = evaluate_answers(eval_set, retrieval_per_query, top_k=3)
 ├── eval_results.csv       # Per-query answers and scores (generated on run)
 └── README.md
 ```
-
-## Future Improvements
-
-Retrieval, since that is where the evaluation shows the pipeline is weakest:
-- Raise `top_k` from 3 to 5 and rerun the test set to confirm the expected gain
-- Add re-ranking (e.g., a cross-encoder) after initial retrieval
-- Add hybrid search (BM25 + dense), since many missed queries name a specific class or function
-- Try structure-aware chunking that splits on Markdown headings instead of fixed character counts
-- Test the BGE query instruction prefix for short queries
-
-Evaluation:
-- Grow the test set and add real questions written by support engineers
-- Score answer correctness against the saved reference answers
-- Use a different model as the judge than the one that generates answers
-- Track metrics over time to catch retrieval drift
-
-Productionisation:
-- Swap Milvus Lite for a hosted Milvus/Zilliz cluster for production scale
-- Cache embeddings to avoid recomputation on re-runs
-- Add a lightweight API/UI layer (FastAPI + Streamlit) for support engineers
